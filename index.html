@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special For You, Maria ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Sacramento&display=swap');
+
+        :root {
+            --ink: #335763;
+            --ink-light: #5C7C87;
+        }
+
+        /* ===== THEME: BEACH (page 1 - 6) ===== */
+        body.theme-beach {
+            --grad-top: #AEE3F5;
+            --grad-mid: #4FC3DA;
+            --grad-bottom: #1B6B93;
+            --card-bg: #FBE9D0;
+            --accent1: #FF8C69;
+            --accent2: #1B6B93;
+            --heading-color: #1B6B93;
+            --board-border: #1B6B93;
+            --wall-bg: #F3D9AE;
+            --board-bg: #EAF7FB;
+            --catch-top: #BDE8F4;
+            --catch-bottom: #6FC6DD;
+        }
+
+        /* ===== THEME: LOVE (page 7 - 12) ===== */
+        body.theme-love {
+            --grad-top: #FFD9E2;
+            --grad-mid: #FF8FA3;
+            --grad-bottom: #E63950;
+            --card-bg: #FFEEF1;
+            --accent1: #FF6F91;
+            --accent2: #E63950;
+            --heading-color: #E63950;
+            --board-border: #E63950;
+            --wall-bg: #FFD3DC;
+            --board-bg: #FFF4F6;
+            --catch-top: #FFD9E2;
+            --catch-bottom: #FF8FA3;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(180deg, var(--grad-top) 0%, var(--grad-mid) 55%, var(--grad-bottom) 100%);
+            background-attachment: fixed;
+            transition: background 0.9s ease;
+            color: var(--ink);
+            overflow-y: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            width: 100vw;
+            padding: 35px 15px;
+        }
+
+        .bg-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.55;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 480px;
+            min-height: 520px;
+            background: var(--card-bg);
+            transition: background 0.9s ease;
+            border-radius: 28px;
+            box-shadow: 0 24px 50px rgba(20, 50, 70, 0.25);
+            padding: 45px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            animation: bob 5s ease-in-out infinite;
+        }
+
+        @keyframes bob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .page {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .page.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-emoji {
+            font-size: 2.8rem;
+            margin-bottom: 18px;
+        }
+
+        h2 {
+            color: var(--heading-color);
+            transition: color 0.9s ease;
+            margin-bottom: 20px;
+            font-weight: 700;
+            font-size: 1.25rem;
+            line-height: 1.6;
+            max-width: 95%;
+        }
+
+        .cursive {
+            font-family: 'Sacramento', cursive;
+            font-size: clamp(2.4rem, 9vw, 3.2rem);
+            color: var(--accent1);
+            margin-bottom: 10px;
+            line-height: 1.2;
+            word-wrap: break-word;
+        }
+
+        .thin-text {
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: lowercase;
+            color: var(--ink-light);
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 0.98rem;
+            line-height: 1.65;
+            margin-bottom: 25px;
+            color: var(--ink-light);
+            max-width: 95%;
+        }
+
+        button {
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            color: white;
+            border: none;
+            padding: 14px 38px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 16px rgba(20, 50, 70, 0.2);
+            transition: all 0.3s ease, background 0.9s ease;
+            outline: none;
+            position: relative;
+            z-index: 25;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(20, 50, 70, 0.3);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 16px;
+            width: 100%;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        #btn-tidak {
+            background: #8FA6AE;
+            box-shadow: 0 6px 16px rgba(143, 166, 174, 0.4);
+        }
+
+        #emoji-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .floating-emoji {
+            position: absolute;
+            bottom: -50px;
+            font-size: 2.5rem;
+            animation: floatUp 2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0.5) rotate(0deg); opacity: 0; }
+            15% { opacity: 1; transform: translateY(-50px) scale(1.2); }
+            100% { transform: translateY(-105vh) scale(1) rotate(var(--rot)); opacity: 0; }
+        }
+
+        /* ===== Envelope & Letter ===== */
+        .envelope-scene {
+            perspective: 1100px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .envelope {
+            position: relative;
+            width: 250px;
+            height: 170px;
+            cursor: pointer;
+            z-index: 22;
+        }
+
+        .envelope-back {
+            position: absolute;
+            inset: 0;
+            background: #F3D9AE;
+            border: 2px solid var(--accent1);
+            border-radius: 12px;
+            box-shadow: 0 12px 25px rgba(20, 50, 70, 0.15);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--accent1);
+            clip-path: polygon(0 0, 50% 58%, 100% 0);
+            transform-origin: top center;
+            transition: transform 0.6s ease, opacity 0.6s ease;
+            border-radius: 12px 12px 0 0;
+            z-index: 3;
+        }
+
+        .envelope-flap.open {
+            transform: rotateX(180deg);
+            opacity: 0;
+        }
+
+        .envelope-seal {
+            position: absolute;
+            top: 34%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.8rem;
+            z-index: 4;
+        }
+
+        .envelope-label {
+            position: absolute;
+            bottom: 16px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-family: 'Sacramento', cursive;
+            font-size: 1.5rem;
+            color: var(--ink);
+            z-index: 2;
+        }
+
+        .envelope-hint {
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: var(--ink-light);
+            margin-bottom: 20px;
+            cursor: pointer;
+            z-index: 23;
+        }
+
+        .letter-paper {
+            width: 100%;
+            background: #FFF8EC;
+            border: 2px solid var(--accent1);
+            border-radius: 18px;
+            padding: 25px 22px;
+            text-align: left;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(20, 50, 70, 0.1);
+        }
+
+        .letter-paper p {
+            text-align: left;
+            max-width: 100%;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 14px;
+            color: var(--ink);
+        }
+
+        /* ===== Maze Game (City Theme Override) ===== */
+        .maze-title {
+            font-size: 1.15rem;
+            margin-bottom: 5px;
+            font-weight: 700;
+            color: var(--heading-color);
+        }
+
+        .maze-sub {
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            color: var(--ink-light);
+        }
+
+        #maze-board {
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            grid-template-rows: repeat(9, 1fr);
+            width: 270px;
+            height: 270px;
+            background: #2c3e50; /* Aspal Jalanan Kota */
+            border: 4px solid #1a252f;
+            border-radius: 14px;
+            margin: 10px auto;
+            padding: 2px;
+        }
+
+        .cell {
+            width: 100%;
+            height: 100%;
+            background: #2c3e50; /* Jalur aspal */
+        }
+
+        .wall {
+            background: #7f8c8d; /* Blok Gedung / Pembatas jalan */
+            border: 1px solid #95a5a6;
+            border-radius: 4px;
+        }
+
+        .player, .goal {
+            background: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.4rem;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            width: 135px;
+            margin: 8px auto;
+        }
+
+        .ctrl-btn {
+            background: #fff;
+            color: #2c3e50;
+            border: 2px solid var(--accent1);
+            padding: 8px;
+            font-size: 1rem;
+            border-radius: 10px;
+            box-shadow: none;
+            font-weight: bold;
+            z-index: 25;
+        }
+
+        .empty-space {
+            visibility: hidden;
+        }
+
+        #btn-finish, #btn-catch-finish, #btn-wa-final {
+            margin-top: 20px;
+            width: 100%;
+            padding: 15px 20px;
+        }
+
+        #btn-wa-final {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+        }
+        #btn-wa-final:hover {
+            box-shadow: 0 10px 22px rgba(37, 211, 102, 0.55);
+        }
+
+        /* ===== Catch The Heart Game ===== */
+        #catch-area {
+            position: relative;
+            width: 100%;
+            max-width: 320px;
+            height: 290px;
+            background: linear-gradient(180deg, var(--catch-top) 0%, var(--catch-bottom) 100%);
+            border: 4px solid var(--board-border);
+            border-radius: 18px;
+            overflow: hidden;
+            margin: 10px auto;
+            transition: background 0.9s ease, border-color 0.9s ease;
+        }
+
+        .catch-heart {
+            position: absolute;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 30;
+            animation: popIn 0.25s ease;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.3); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        #catch-score {
+            font-weight: 700;
+            color: var(--heading-color);
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body class="theme-beach">
+
+    <div class="bg-hearts" id="bg-hearts"></div>
+
+    <div class="container">
+
+        <div id="page1" class="page active">
+            <div class="page-emoji">🌅</div>
+            <p class="thin-text">untuk</p>
+            <div class="cursive">Maria Felicya<br>Benedetta Edvanti</div>
+            <p class="thin-text" style="margin-top: 8px;">tersayang</p>
+            <button onclick="nextPage(2)" style="margin-top: 18px;">Let's start</button>
+        </div>
+
+        <div id="page2" class="page">
+            <div class="page-emoji">🌌</div>
+            <h2>Tau ga, kenapa diriku suka akan keindahan langit malam?</h2>
+            <button onclick="nextPage(3)">gatau</button>
+        </div>
+
+        <div id="page3" class="page">
+            <div class="page-emoji">🌙</div>
+            <h2>karena disana, aku dapat melihat pesona rembulan yang tidak terpisahkan dengan cantiknya bintang</h2>
+            <button onclick="nextPage(4)">lah terus</button>
+        </div>
+
+        <div id="page4" class="page">
+            <div class="page-emoji">⭐</div>
+            <h2>aku harap hubungan kita layaknya malam, aku bulan, dan kamu bintangnya</h2>
+            <button onclick="nextPage(5)">EEAAA BISA AE</button>
+        </div>
+
+        <div id="page5" class="page">
+            <div class="page-emoji">💌</div>
+            <h2>Maria, semoga kamu sedang sehat dan bahagia, I've got a special letter for you </h2>
+            <button onclick="nextPage(6)">AKU MAU BACA</button>
+        </div>
+
+        <div id="page6" class="page">
+            <h2 style="margin-bottom: 22px;">Untukmu... 💌</h2>
+
+            <div class="envelope-scene" id="envelope-scene">
+                <div class="envelope" onclick="openEnvelope()">
+                    <div class="envelope-back"></div>
+                    <div class="envelope-flap" id="envelope-flap"></div>
+                    <div class="envelope-seal">❤️</div>
+                    <div class="envelope-label">Untuk Maria</div>
+                </div>
+            </div>
+            <p class="envelope-hint" id="envelope-hint" onclick="openEnvelope()">tap amplopnya untuk membuka surat</p>
+
+            <div class="letter-paper" id="letter-paper" style="display: none;">
+                <p style="font-weight: 600; color: var(--accent1);">Dear Maria</p>
+                <p>Semenjak diriku bertemu denganmu, ku merasa ada yang berubah. Pertama kali ku memandangmu ketika acara persink itu, rasanya.. ada hal yang tidak bisa kuungkapkan dengan kata-kata.</p>
+                <p>Disaat ku belum ingin jatuh hati, karena sifat baik dan unikmu itu, aku malah terjatuh oleh keelokanmu.</p>
+                <p>Masih ingatkah kamu kala kita berteduh di tengah rintik hujan itu? Sebuah halte yang menjadi saksi perasaanku, bahwa kamu adalah orangnya. Ucapanmu yang masih melekat di benakku, membuatku merasa yakin bahwa yang aku rasakan padamu ini bukan lagi seperti biasanya.</p>
+                <p>Maria, aku jatuh cinta. Maybe this time for us to start a new chapter. Aku pilih kamu, aku ingin kita lebih serius lagi....</p>
+                <p style="margin-bottom: 0; font-weight: 700; color: var(--ink);">From,<br>Malvin</p>
+            </div>
+
+            <button id="btn-letter-continue" style="display: none;" onclick="nextPage(7)">awww makasih bang</button>
+        </div>
+
+        <div id="page7" class="page">
+            <div class="maze-title">TAPI BENTAR, aku jemput kamu dulu ya! 🏍️💨</div>
+            <p class="maze-sub">Arahkan motor (🛵) melewati jalanan kota menuju cewek (👩‍🦰)</p>
+
+            <div id="maze-board"></div>
+
+            <div class="controls">
+                <div class="empty-space"></div>
+                <button class="ctrl-btn" onclick="movePlayer('UP')">▲</button>
+                <div class="empty-space"></div>
+                <button class="ctrl-btn" onclick="movePlayer('LEFT')">◀</button>
+                <div class="empty-space"></div>
+                <button class="ctrl-btn" onclick="movePlayer('RIGHT')">▶</button>
+                <div class="empty-space"></div>
+                <button class="ctrl-btn" onclick="movePlayer('DOWN')">▼</button>
+                <div class="empty-space"></div>
+            </div>
+
+            <button id="btn-finish" style="display: none;" onclick="nextPage(8)">YEY NYAMPE, anu jd gini..</button>
+        </div>
+
+        <div id="page8" class="page">
+            <div class="page-emoji">🌹</div>
+            <div class="cursive" style="font-size: 2.1rem;">May I be your boyfriend?</div>
+            <p style="margin-top: 14px;">Maukah kamu terus berjalan bersamaku, saling melengkapi setiap harinya?</p>
+            <div class="btn-group">
+                <button id="btn-mau" onclick="nextPage(9)">Mau! ✨</button>
+                <button id="btn-tidak" onclick="spawnCryingEmoji()">Tidak 😢</button>
+            </div>
+        </div>
+
+        <div id="page9" class="page">
+            <div class="page-emoji">💖</div>
+            <div class="cursive" style="font-size: 2.3rem;">Thank You, Beautiful!</div>
+            <p style="margin-top: 10px; font-weight: 600; color: var(--accent2);">You just made me the happiest guy alive. ✨</p>
+            <p style="font-size: 0.9rem; color: var(--ink-light);">Sebelum kita lanjut, aku punya satu challenge lagi buat kamu. Are you ready?</p>
+            <button onclick="nextPage(10)">Ready! 🫶</button>
+        </div>
+
+        <div id="page10" class="page">
+            <div class="maze-title">Catch The Heart 🫶</div>
+            <p class="maze-sub">Tangkap 7 hati yang muncul sebelum hilang!</p>
+            <div id="catch-score">0/7</div>
+            <div id="catch-area"></div>
+            <button id="btn-catch-finish" style="display: none;" onclick="nextPage(11)">Lanjut</button>
+        </div>
+
+        <div id="page11" class="page">
+            <div class="page-emoji">🌌✨</div>
+            <h2>This is just the beginning of our story...</h2>
+            <p>Terima kasih sudah meluangkan waktumu untuk melihat ini.</p>
+            <p style="font-weight: 600; color: var(--accent2);">Mulai hari ini, KITA JADIANN. ❤️</p>
+            <button onclick="nextPage(12)"> YEYY SAMA SAMAAA </button>
+        </div>
+
+        <div id="page12" class="page">
+            <div class="page-emoji">💞</div>
+            <h2>Makasih banyak ya udah mau ngikutin semua ini sampe akhir 🥹</h2>
+            <p>Sekarang aku pengen denger jawaban, cerita, dan perasaan kamu juga. Aku bakal nunggu pesan dari kamu </p>
+            <button id="btn-wa-final" onclick="redirectToWA()">Lanjut ke WhatsApp 💬</button>
+        </div>
+
+    </div>
+
+    <div id="emoji-container"></div>
+
+    <audio id="audio-kahitna" src="Kahitna_-_Cinta_ Sudah_Lewat_Official_Music_Video.mp3" preload="auto" loop></audio>
+    <audio id="audio-shape" src="Shape_of_My_Heart.mp3" preload="auto" loop></audio>
+
+    <script>
+        let currentTheme = 'beach';
+        let kahitnaStarted = false;
+        let shapeStarted = false;
+
+        function playFrom(audioEl, time) {
+            function setTimeAndPlay() {
+                try { audioEl.currentTime = time; } catch (err) {}
+                audioEl.play().catch(() => {});
+            }
+            if (audioEl.readyState >= 1) {
+                setTimeAndPlay();
+            } else {
+                audioEl.addEventListener('loadedmetadata', setTimeAndPlay, { once: true });
+            }
+        }
+
+        function nextPage(pageNumber) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+
+            const targetPage = document.getElementById(`page${pageNumber}`);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+
+            const newTheme = pageNumber <= 6 ? 'beach' : 'love';
+            if (newTheme !== currentTheme) {
+                currentTheme = newTheme;
+                document.body.classList.remove('theme-beach', 'theme-love');
+                document.body.classList.add(newTheme === 'beach' ? 'theme-beach' : 'theme-love');
+                createBgDecor(newTheme);
+            }
+
+            if (pageNumber === 2 && !kahitnaStarted) {
+                kahitnaStarted = true;
+                playFrom(document.getElementById('audio-kahitna'), 22);
+            }
+
+            if (pageNumber === 7 && !shapeStarted) {
+                shapeStarted = true;
+                const kahitna = document.getElementById('audio-kahitna');
+                if (kahitna) kahitna.pause();
+                playFrom(document.getElementById('audio-shape'), 157);
+            }
+
+            if (pageNumber === 7) {
+                initMaze();
+            }
+            if (pageNumber === 10) {
+                initCatchGame();
+            }
+        }
+
+        function spawnCryingEmoji() {
+            const container = document.getElementById('emoji-container');
+            const emoji = document.createElement('div');
+            emoji.innerText = '😭';
+            emoji.classList.add('floating-emoji');
+
+            const randomX = Math.random() * 80 + 10;
+            const randomRot = (Math.random() * 60 - 30) + 'deg';
+
+            emoji.style.left = randomX + '%';
+            emoji.style.setProperty('--rot', randomRot);
+            container.appendChild(emoji);
+
+            setTimeout(() => { emoji.remove(); }, 2000);
+        }
+
+        // ===== ENVELOPE =====
+        function openEnvelope() {
+            document.getElementById('envelope-flap').classList.add('open');
+            document.getElementById('envelope-hint').style.display = 'none';
+            setTimeout(() => {
+                document.getElementById('envelope-scene').style.display = 'none';
+                document.getElementById('letter-paper').style.display = 'block';
+                document.getElementById('btn-letter-continue').style.display = 'inline-block';
+            }, 750);
+        }
+
+        // ===== MAZE GAME =====
+        const mazeSize = 9;
+        const mazeLayout = [
+            [0, 1, 0, 0, 0, 1, 0, 0, 0],
+            [0, 1, 0, 1, 0, 1, 0, 1, 0],
+            [0, 0, 0, 1, 0, 0, 0, 1, 0],
+            [1, 1, 0, 1, 1, 1, 1, 1, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 1, 1, 1, 1, 1, 0, 1, 1],
+            [0, 1, 0, 0, 0, 1, 0, 1, 0],
+            [0, 0, 0, 1, 0, 0, 0, 1, 0],
+            [1, 1, 0, 1, 1, 1, 0, 0, 0]
+        ];
+
+        let playerPos = { x: 0, y: 0 };
+        const goalPos = { x: 8, y: 8 };
+        let isGameFinished = false;
+
+        function initMaze() {
+            const board = document.getElementById('maze-board');
+            board.innerHTML = '';
+            isGameFinished = false;
+            playerPos = { x: 0, y: 0 };
+            document.getElementById('btn-finish').style.display = 'none';
+
+            for (let r = 0; r < mazeSize; r++) {
+                for (let c = 0; c < mazeSize; c++) {
+                    const cell = document.createElement('div');
+                    cell.id = `cell-${r}-${c}`;
+
+                    if (mazeLayout[r][c] === 1) {
+                        cell.className = 'cell wall';
+                    } else {
+                        cell.className = 'cell';
+                    }
+
+                    if (r === playerPos.y && c === playerPos.x) {
+                        cell.classList.add('player');
+                        cell.innerText = '🛵';
+                    } else if (r === goalPos.y && c === goalPos.x) {
+                        cell.classList.add('goal');
+                        cell.innerText = '👩‍🦰';
+                    }
+                    board.appendChild(cell);
+                }
+            }
+            window.addEventListener('keydown', handleKeyDown);
+        }
+
+        function handleKeyDown(e) {
+            if (isGameFinished) return;
+            if (e.key === 'ArrowUp' || e.key === 'w') movePlayer('UP');
+            if (e.key === 'ArrowDown' || e.key === 's') movePlayer('DOWN');
+            if (e.key === 'ArrowLeft' || e.key === 'a') movePlayer('LEFT');
+            if (e.key === 'ArrowRight' || e.key === 'd') movePlayer('RIGHT');
+        }
+
+        function movePlayer(direction) {
+            if (isGameFinished) return;
+
+            let newX = playerPos.x;
+            let newY = playerPos.y;
+
+            if (direction === 'UP') newY--;
+            if (direction === 'DOWN') newY++;
+            if (direction === 'LEFT') newX--;
+            if (direction === 'RIGHT') newX++;
+
+            if (newX >= 0 && newX < mazeSize && newY >= 0 && newY < mazeSize) {
+                if (mazeLayout[newY][newX] !== 1) {
+                    const oldCell = document.getElementById(`cell-${playerPos.y}-${playerPos.x}`);
+                    oldCell.classList.remove('player');
+                    oldCell.innerText = '';
+
+                    playerPos.x = newX;
+                    playerPos.y = newY;
+
+                    const newCell = document.getElementById(`cell-${playerPos.y}-${playerPos.x}`);
+                    newCell.classList.add('player');
+                    newCell.innerText = '🛵';
+
+                    checkWin();
+                }
+            }
+        }
+
+        function checkWin() {
+            if (playerPos.x === goalPos.x && playerPos.y === goalPos.y) {
+                isGameFinished = true;
+                window.removeEventListener('keydown', handleKeyDown);
+
+                const currentCell = document.getElementById(`cell-${playerPos.y}-${playerPos.x}`);
+                currentCell.innerText = '💑❤️';
+
+                document.getElementById('btn-finish').style.display = 'block';
+            }
+        }
+
+        // ===== CATCH THE HEART GAME =====
+        let caughtCount = 0;
+        const targetCatch = 7;
+        let catchInterval = null;
+
+        function initCatchGame() {
+            caughtCount = 0;
+            document.getElementById('catch-score').innerText = '0/7';
+            document.getElementById('btn-catch-finish').style.display = 'none';
+            const area = document.getElementById('catch-area');
+            area.innerHTML = '';
+
+            if (catchInterval) clearInterval(catchInterval);
+            catchInterval = setInterval(spawnCatchHeart, 650);
+        }
+
+        function spawnCatchHeart() {
+            if (caughtCount >= targetCatch) {
+                clearInterval(catchInterval);
+                return;
+            }
+
+            const area = document.getElementById('catch-area');
+            const heart = document.createElement('div');
+            heart.className = 'catch-heart';
+            heart.innerText = '❤️';
+
+            const maxX = Math.max(area.clientWidth - 44, 10);
+            const maxY = Math.max(area.clientHeight - 44, 10);
+            heart.style.left = Math.floor(Math.random() * maxX) + 'px';
+            heart.style.top = Math.floor(Math.random() * maxY) + 'px';
+
+            heart.onclick = function () {
+                if (heart.parentNode) heart.parentNode.removeChild(heart);
+                caughtCount++;
+                document.getElementById('catch-score').innerText = `${caughtCount}/7`;
+                if (caughtCount >= targetCatch) {
+                    clearInterval(catchInterval);
+                    document.getElementById('btn-catch-finish').style.display = 'block';
+                }
+            };
+
+            area.appendChild(heart);
+
+            setTimeout(() => {
+                if (heart.parentNode) heart.parentNode.removeChild(heart);
+            }, 1600);
+        }
+
+        function redirectToWA() {
+            const nomorWA = "6281234163542";
+            const pesan = encodeURIComponent("Iya Malvin, aku mau kok jadi pacar kamu! Suratnya manis banget, makasih yaaa... 🥰❤️");
+            const urlWA = `https://wa.me/${nomorWA}?text=${pesan}`;
+
+            window.location.href = urlWA;
+        }
+
+        // ===== BACKGROUND DECOR =====
+        function createBgDecor(theme) {
+            const bg = document.getElementById('bg-hearts');
+            bg.innerHTML = '';
+            const icons = theme === 'beach'
+                ? ['🌊', '🐚', '🫧', '❤️']
+                : ['❤️', '💕', '💖', '🌹'];
+            for (let i = 0; i < 18; i++) {
+                const item = document.createElement('div');
+                item.innerText = icons[Math.floor(Math.random() * icons.length)];
+                item.style.position = 'absolute';
+                item.style.fontSize = Math.random() * 14 + 10 + 'px';
+                item.style.left = Math.random() * 100 + 'vw';
+                item.style.top = Math.random() * 100 + 'vh';
+                item.style.opacity = Math.random() * 0.5 + 0.2;
+                bg.appendChild(item);
+            }
+        }
+        createBgDecor('beach');
+    </script>
+</body>
+</html>
